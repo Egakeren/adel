@@ -7,45 +7,43 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
     <style>
-     .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -50px; /* Naikkan tombol agar dekat dengan bunga */
-    position: relative;
-    z-index: 10;
-    display: none;
-}
+.button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute; /* Menggunakan absolute positioning */
+            bottom: 20px; /* Atur posisi tombol dari bawah */
+            left: 50%; /* Pusatkan tombol */
+            transform: translateX(-50%); /* Pusatkan tombol */
+            z-index: 10; /* Pastikan tombol di atas bunga */
+            display: none; /* Sembunyikan tombol awal */
+        }
 
-.glow-button {
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.4s ease;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-    position: relative;
-    overflow: hidden;
- 
-    transform: scale(0.8);
-    transition: opacity 1s ease, transform 0.5s ease;
-}
+        .glow-button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            transform: scale(0.8);
+            transition: opacity 1s ease, transform 0.5s ease;
+        }
 
-.glow-button.show {
-    opacity: 1; /* Muncul dengan efek fade-in */
-    transform: scale(1);
-}
+        .glow-button.show {
+            opacity: 1; /* Muncul dengan efek fade-in */
+            transform: scale(1);
+        }
 
-.glow-button:hover {
-    background-color: pink;
-    transform: scale(1.1);
-    box-shadow: 0 0 25px white, 0 0 50px white; /* Efek glow lebih kuat */
-}
-
-
+        .glow-button:hover {
+            background-color: pink;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px white, 0 0 50px white; /* Efek glow lebih kuat */
+        }
+    </style>
     </style>
     <title>flowers</title>
 </head>
