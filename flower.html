@@ -49,7 +49,7 @@
     </style>
     <title>flowers</title>
 </head>
-<body class="container">
+  <div class="container" id="zoomContainer">
 
   <!-- Pembuat code: https://codepen.io/mdusmanansari/pen/BamepLe -->
     <div class="night"></div>
@@ -380,4 +380,68 @@
 
   // Menampilkan tombol setelah 3 detik (3000 ms)
   setTimeout(showButton, 7000);
+     let container = document.getElementById("zoomContainer");
+        let scale = 1;
+        let startX = 0, startY = 0, lastX = 0, lastY = 0;
+        let isDragging = false;
+        let touchStartDistance = 0;
+        
+        function getDistance(touches) {
+            let dx = touches[0].clientX - touches[1].clientX;
+            let dy = touches[0].clientY - touches[1].clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        container.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            let zoomFactor = 0.1;
+            scale += e.deltaY * -zoomFactor / 10;
+            scale = Math.min(Math.max(0.5, scale), 3);
+            container.style.transform = `translate(${lastX}px, ${lastY}px) scale(${scale})`;
+        });
+        
+        container.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            startX = e.clientX - lastX;
+            startY = e.clientY - lastY;
+        });
+        
+        window.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+            lastX = e.clientX - startX;
+            lastY = e.clientY - startY;
+            container.style.transform = `translate(${lastX}px, ${lastY}px) scale(${scale})`;
+        });
+        
+        window.addEventListener("mouseup", () => {
+            isDragging = false;
+        });
+
+        container.addEventListener("touchstart", (e) => {
+            if (e.touches.length === 2) {
+                touchStartDistance = getDistance(e.touches);
+            } else if (e.touches.length === 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - lastX;
+                startY = e.touches[0].clientY - lastY;
+            }
+        });
+
+        container.addEventListener("touchmove", (e) => {
+            if (e.touches.length === 2) {
+                let newDistance = getDistance(e.touches);
+                let zoomFactor = newDistance / touchStartDistance;
+                scale = Math.min(Math.max(0.5, scale * zoomFactor), 3);
+                touchStartDistance = newDistance;
+                container.style.transform = `translate(${lastX}px, ${lastY}px) scale(${scale})`;
+            } else if (isDragging && e.touches.length === 1) {
+                lastX = e.touches[0].clientX - startX;
+                lastY = e.touches[0].clientY - startY;
+                container.style.transform = `translate(${lastX}px, ${lastY}px) scale(${scale})`;
+            }
+        });
+
+        container.addEventListener("touchend", () => {
+            isDragging = false;
+        });
 </script>
