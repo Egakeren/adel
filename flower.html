@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
     <style>
      .button-container {
@@ -43,17 +44,7 @@
     transform: scale(1.1);
     box-shadow: 0 0 25px white, 0 0 50px white; /* Efek glow lebih kuat */
 }
-body {
-    overflow: hidden; /* Menyembunyikan scrollbar default */
-}
 
-.container {
-    width: 100vw; /* Lebar penuh viewport */
-    height: 100vh; /* Tinggi penuh viewport */
-    overflow: auto; /* Mengizinkan scroll */
-    transform-origin: top left; /* Titik asal transformasi */
-    transition: transform 0.2s; /* Transisi halus saat zoom */
-}
 
     </style>
     <title>flowers</title>
@@ -389,18 +380,4 @@ body {
 
   // Menampilkan tombol setelah 3 detik (3000 ms)
   setTimeout(showButton, 7000);
-
-    let scale = 1; // Skala awal
-const container = document.querySelector('.container');
-
-window.addEventListener('wheel', (event) => {
-    event.preventDefault(); // Mencegah scroll default
-    if (event.deltaY < 0) {
-        scale += 0.1; // Zoom in
-    } else {
-        scale -= 0.1; // Zoom out
-    }
-    scale = Math.min(Math.max(1, scale), 3); // Batasi skala antara 1 dan 3
-    container.style.transform = `scale(${scale})`; // Terapkan skala
-});
 </script>
